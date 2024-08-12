@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+    width: 5px;
+    /* Largura da barra de rolagem */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    /* Cor do fundo da barra de rolagem */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    /* Cor da alça da barra de rolagem */
+    border-radius: 5px;
+    /* Borda arredondada da alça */
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+    /* Cor da alça da barra de rolagem quando hover */
+}
+
+:root {
+    --ev-c-white: #ffffff;
+    --ev-c-white-soft: #f8f8f8;
+    --ev-c-white-mute: #f2f2f2;
+
+    --ev-c-black: #1b1b1f;
+    --ev-c-black-soft: #222222;
+    --ev-c-black-mute: #282828;
+
+    --ev-c-gray-1: #515c67;
+    --ev-c-gray-2: #414853;
+    --ev-c-gray-3: #32363f;
+
+    --ev-c-text-1: rgba(255, 255, 245, 0.86);
+    --ev-c-text-2: rgba(235, 235, 245, 0.6);
+    --ev-c-text-3: rgba(235, 235, 245, 0.38);
+
+    --ev-button-alt-border: transparent;
+    --ev-button-alt-text: var(--ev-c-text-1);
+    --ev-button-alt-bg: var(--ev-c-gray-3);
+    --ev-button-alt-hover-border: transparent;
+    --ev-button-alt-hover-text: var(--ev-c-text-1);
+    --ev-button-alt-hover-bg: var(--ev-c-gray-2);
+}
+
+:root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+
+    color-scheme: light;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+}
+
+a {
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
+}
+a:hover {
+    color: #535bf2;
+}
+
+body {
+    margin: 0;
+    display: flex;
+    place-items: center;
+    width: 100vw;
+    overflow-x: hidden;
+    position: relative;
+}
+
+h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+}
+
+button {
+    border-radius: 8px;
+    border: 0px solid transparent;
+    padding: 0.6em 1.2em;
+    font-size: 1em;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+button:focus,
+button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}
+
+code {
+    background-color: #1a1a1a;
+    padding: 2px 4px;
+    margin: 0 4px;
+    border-radius: 4px;
+}
+
+.card {
+    padding: 2em;
+}
+
+#app {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
+    text-align: center;
+}
+
+@media (prefers-color-scheme: light) {
+    :root {
+        color: #213547;
+        background-color: #ffffff;
+    }
+    a:hover {
+        color: #747bff;
+    }
+    button {
+        background-color: #f9f9f9;
+    }
+    code {
+        background-color: #f9f9f9;
+    }
+}
