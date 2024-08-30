@@ -50,6 +50,7 @@ web_modules/
 
 # Optional npm cache directory
 .npm
+package-lock.json
 
 # Optional eslint cache
 .eslintcache
@@ -90,6 +91,8 @@ out
 # Nuxt.js build / generate output
 .nuxt
 dist
+dist-electron
+**/**unpacked**/
 
 # Gatsby files
 .cache/

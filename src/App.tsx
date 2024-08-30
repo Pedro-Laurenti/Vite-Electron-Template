@@ -1,23 +1,35 @@
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import SelectPage from './pages/SelectPage';
+import Layout from './Layout';
+import { StylePage, Login } from './pages';
+import { Suspense } from 'react';
 
-const App = () => {
+export default function App() {
+    // const faultyVariable = null;
     return (
-        <div className='App w-full'>
-            <div className='APPCONTEUDO w-full '>
-                <Router>
+        <div className='App APPCONTEUDO w-full flex max-h-[100vh] overflow-clip'>
+            {/* DESCONSIDERAR <div>{faultyVariable.someProperty}</div> */}
+            <Router>
+                <Suspense fallback={<div>Loading...</div>}>
                     <Routes>
                         <Route
                             path="/"
                             element={
-                                <SelectPage />
+                                <Layout>
+                                    <Login />
+                                </Layout>
+                            }
+                        />
+                        <Route
+                            path="/style"
+                            element={
+                                <Layout>
+                                    <StylePage />
+                                </Layout>
                             }
                         />
                     </Routes>
-                </Router>
-            </div>
+                </Suspense>
+            </Router>
         </div>
     );
 }
-
-export default App;

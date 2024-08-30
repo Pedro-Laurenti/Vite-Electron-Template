@@ -2,9 +2,8 @@
 
 declare namespace NodeJS {
     interface ProcessEnv {
-        VSCODE_DEBUG?: 'true'
+        VSCODE_DEBUG?: 'false'
         APP_ROOT: string
-        /** /dist/ or /public/ */
         VITE_PUBLIC: string
     }
 }

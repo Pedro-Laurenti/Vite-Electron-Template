@@ -2,40 +2,63 @@
 @tailwind components;
 @tailwind utilities;
 
+@import '@fontsource/ubuntu/400.css';
+@import '@fontsource/ubuntu/500.css';
+@import '@fontsource/ubuntu/700.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/inter/800.css';
+
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/400-italic.css";
+@import "@fontsource/ibm-plex-mono/600.css";
+@import "@fontsource/ibm-plex-mono/600-italic.css";
+
 * {
     box-sizing: border-box;
     margin: 0;
 }
 
-::-webkit-scrollbar {
-    border-radius: 10px;
-    height: 10px;
-    width: 8px;
-    }
-
-::-webkit-scrollbar-thumb {
-    background: #999;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-track {
-    border-radius: 10px;
-}
-
-
 :root {
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-    line-height: 1.5;
-    font-weight: 400;
-
-    color-scheme: light;
-
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
+    overflow: hidden;
 }
 
+body {
+    font-family: "inter";
+}
 
+h1,h2,h3,h4,h5,h6{
+    font-family: "ubuntu";
+    margin: 0;
+}
 
+p, pre, small{
+    margin: 0;
+}
+
+.prose{
+    code {
+        border-radius: 5px;
+        &::before {
+            content: '```';
+            display: inline;
+            font-family: monospace;
+        }
+        &::after {
+            content: '```';
+            display: inline;
+            font-family: monospace;
+        }
+    }
+    h1,h2,h3,h4,h5,h6{
+        margin: 0;
+    }
+    
+}

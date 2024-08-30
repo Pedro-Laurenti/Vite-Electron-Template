@@ -6,36 +6,44 @@
     },
     "files": [
         "dist-electron",
-        "dist"
+        "dist",
+        {
+            "from": "node_modules/electron/dist/locales",
+            "filter": [
+                "en-US.pak",
+                "pt-BR.pak"
+            ]
+        },
+        {
+            "filter": "!node_modules/electron/dist/locales/*.pak"
+        }
     ],
     "mac": {
         "artifactName": "${productName}_${version}.${ext}",
         "target": [
             "dmg",
             "zip"
-        ]
+        ],
+        "icon": "public/icon.png",
     },
     "win": {
-        "target": [
-        {
+        "target": [{
             "target": "nsis",
             "arch": [
-            "x64"
+                "x64"
             ]
-        }
-        ],
+        }],
         "artifactName": "${productName}.${ext}",
-        "icon": "./build/icon.ico",
+        "icon": "public/icon.png",
     },
     "linux":{
         "target": [
-            "AppImage",
-            "snap",
             "deb"
         ],
         "maintainer": "electronjs.org",
         "category": "Utility",
         "artifactName": "${productName}-${version}.${ext}",
+        "icon": "public/icon.png",
     },
     "nsis": {
         "oneClick": false,

@@ -21,15 +21,13 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
 });
 
 // --------- Preload scripts loading ---------
+
 function domReady(condition: DocumentReadyState[] = ['complete', 'interactive']) {
     return new Promise(resolve => {
-        console.log('Checking document ready state...');
         if (condition.includes(document.readyState)) {
-            console.log('Document is ready:', document.readyState);
             resolve(true);
         } else {
             document.addEventListener('readystatechange', () => {
-                console.log('Document ready state changed:', document.readyState);
                 if (condition.includes(document.readyState)) {
                     resolve(true);
                 }
@@ -51,13 +49,6 @@ const safeDOM = {
     },
 };
 
-/**
-    * https://tobiasahlin.com/spinkit
-    * https://connoratherton.com/loaders
-    * https://projects.lukehaas.me/css-loaders
-    * https://matejkustec.github.io/SpinThatShit
-*/
-
 function useLoading() {
     const className = `loaders-svg__circle-animation`;
     const styleContent = `
@@ -72,50 +63,57 @@ function useLoading() {
         .app-loading-wrap {
             position: fixed;
             display: flex;
-            justify-content: space-around;
-            background: rgba(40, 44, 52, 0.8);
+            flex-direction: column-reverse;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.7);
             z-index: 500;
             opacity: 1;
             bottom: 0;
-            transition: opacity 0.5s;
             width: 100%;
+            height: 100%;
+            transition: opacity 0.3s;
         }
         .APPCONTEUDO {
             opacity: 0;
-            transition: opacity 0.5s;
+            transition: opacity 0.3s;
         }
         .fade-in {
             opacity: 1 !important;
         }
 
         .fade-out {
-            opacity: 1;
-            animation: fadeOut 0.2s forwards;
+            opacity: 0;
+            animation: fadeOut 0.3s forwards;
         }
 
         .success-message {
             color: #fff;
             font-size: 1rem;
             opacity: 0;
-
             display: flex;
             flex-direction: row;
             align-items: center;
-
-            transition: opacity 0.2s;
-            transition: 0.2s;
+            transition: opacity 0.3s;
+            margin-top: 10px;
         }
 
         .message-visible {
             opacity: 1;
         }
 
-        svg{
+        .iconloading svg {
             aspect-ratio: 1 / 1;
-            height: 50px;
+            height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
+            animation: spin 1.5s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     `;
     const oStyle = document.createElement('style');
@@ -128,23 +126,25 @@ function useLoading() {
     oDiv.className = 'app-loading-wrap';
     oIcon.className = className;
     oIcon.innerHTML = `
-        <svg viewBox="0 0 230 230" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-                <path id="move-path" d="M102.546 83.5C109.859 70.8333 128.141 70.8333 135.454 83.5L157.971 122.5C165.284 135.167 156.143 151 141.517 151H96.4833C81.8571 151 72.7158 135.167 80.0289 122.5L102.546 83.5Z" fill="#D9D9D9"/>
-                <filter id="goo">
-                    <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
-                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 60 -32"/>
-                </filter>
-            </defs>
-            <g filter="url(#goo)">
-                <circle cx="119" cy="74" r="20" stroke="#6f8191" stroke-width="8"/>
-                <circle cx="79" cy="141" r="20" stroke="#6f8191" stroke-width="8"/>
-                <circle cx="157" cy="141" r="20" stroke="#6f8191" stroke-width="8"/>
-                <circle cx="0" cy="0" r="14" fill="#6f8191">
-                    <animateMotion path="M102.546 83.5C109.859 70.8333 128.141 70.8333 135.454 83.5L157.971 122.5C165.284 135.167 156.143 151 141.517 151H96.4833C81.8571 151 72.7158 135.167 80.0289 122.5L102.546 83.5Z" dur="2s" repeatCount="indefinite" />
-                </circle> 
-            </g>
-        </svg>
+        <div class="iconloading">
+            <svg viewBox="0 0 230 230" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <path id="move-path" d="M102.546 83.5C109.859 70.8333 128.141 70.8333 135.454 83.5L157.971 122.5C165.284 135.167 156.143 151 141.517 151H96.4833C81.8571 151 72.7158 135.167 80.0289 122.5L102.546 83.5Z" fill="#F8F8F8"/>
+                    <filter id="goo">
+                        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+                        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 60 -32"/>
+                    </filter>
+                </defs>
+                <g filter="url(#goo)">
+                    <circle cx="119" cy="74" r="20" stroke="#6f8191" stroke-width="8"/>
+                    <circle cx="79" cy="141" r="20" stroke="#6f8191" stroke-width="8"/>
+                    <circle cx="157" cy="141" r="20" stroke="#6f8191" stroke-width="8"/>
+                    <circle cx="0" cy="0" r="14" fill="#F8F8F8">
+                        <animateMotion path="M102.546 83.5C109.859 70.8333 128.141 70.8333 135.454 83.5L157.971 122.5C165.284 135.167 156.143 151 141.517 151H96.4833C81.8571 151 72.7158 135.167 80.0289 122.5L102.546 83.5Z" dur="2s" repeatCount="indefinite" />
+                    </circle> 
+                </g>
+            </svg>
+        </div>
     `;
     oMessage.className = 'success-message';
     oMessage.textContent = 'Conteúdo carregado com sucesso';
@@ -166,17 +166,13 @@ function useLoading() {
                         appLoadingWrap.classList.add('fade-out');
                         setTimeout(() => {
                             safeDOM.remove(document.body, appLoadingWrap);
-                        }, 1000); // Delay to match fade-out animation
-                    }, 2000); // Delay to show the success message
-                }, 3000); // Delay to show the success message after the icon
-            } else {
-                console.log('Loading screen elements not found.');
+                        }, 300);
+                    }, 1500);
+                }, 1000);
             }
         },
     };
 }
-
-// ----------------------------------------------------------------------
 
 const { appendLoading, removeLoading } = useLoading();
 domReady().then(() => {
@@ -186,14 +182,11 @@ domReady().then(() => {
         setTimeout(() => {
             const content = document.querySelector('.APPCONTEUDO') as HTMLElement;
             if (content) {
-                console.log('Showing content...');
                 content.classList.add('fade-in');
                 content.classList.remove('hidden');
-            } else {
-                console.log('Content element not found.');
             }
-        }, 1000); // Delay to match fade-in animation of the loader
-    }, 2000); // Minimum delay to keep the pre-loader visible (2 seconds for the icon + 2 seconds for the message)
+        }, 300);
+    }, 1000);
 });
 
 window.onmessage = (ev) => {
@@ -202,12 +195,9 @@ window.onmessage = (ev) => {
         setTimeout(() => {
             const content = document.querySelector('.APPCONTEUDO') as HTMLElement;
             if (content) {
-                console.log('Showing content after message event...');
                 content.classList.add('fade-in');
                 content.classList.remove('hidden');
-            } else {
-                console.log('Content element not found after message event.');
             }
-        }, 5000); // Delay to match fade-in animation of the loader
+        }, 1000);
     }
 };
